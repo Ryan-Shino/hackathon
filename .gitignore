@@ -1,0 +1,8 @@
+# Ignore React dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Ignore Python dependencies
+backend/venv/
+backend/__pycache__/
+.env
