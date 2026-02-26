@@ -11,6 +11,14 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get('/hello')
-def read_root():
-    return {"message" : "Hello from the python backend"}
+@app.get('/theme')
+def get_theme(style: str = 'default'):
+    themes = {
+        "forest": "#1b4332",
+        "ocean": "#0077b6",
+        "lava": "#9b2226",
+        "cyber": "#0f172a",
+        "sunset": "#fb8500"
+    }
+    selected_colour = themes.get(style.lower(), "#1e293b")
+    return {"theme": style, "colour": selected_colour}
