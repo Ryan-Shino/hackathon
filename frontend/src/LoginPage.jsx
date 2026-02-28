@@ -8,20 +8,20 @@ const LoginPage = ({ onLogin, onNavigateRegister }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!username || !password) return;
 
     const result = await loginUser(username, password);
 
     if (result.error) {
-      alert("Invalid credentials");
+      alert(result.error);
       return;
     }
 
-    // Optional: store user info
-    localStorage.setItem("username", username);
+    // result now contains: { username, level, strength, etc. }
+    localStorage.setItem("username", result.username);
 
-    onLogin();
+    // Pass the actual user data into the onLogin function
+    onLogin(result);
   };
 
   return (

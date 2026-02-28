@@ -32,14 +32,14 @@ class AuthController:
         return True
 
     def login_user(self, username: str, password: str):
+        print("attempting login for:", username)
+
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         user = cursor.fetchone()
 
         if not user:
             return None
-
-        print(password)
 
         try:
             # Verify the hash
