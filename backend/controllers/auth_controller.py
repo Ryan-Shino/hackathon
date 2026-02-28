@@ -31,3 +31,9 @@ class AuthController:
             return None
 
         return dict(user)
+
+# classes
+# - nature
+# - exercise
+# - social
+# - learning
