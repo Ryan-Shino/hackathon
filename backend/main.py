@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .database import init_db
 from .routers import auth, users
 
+from .routers import users, map_api
 init_db()
 
 app = FastAPI()
@@ -19,3 +20,4 @@ app.add_middleware(
 
 app.include_router(users.router, prefix="/users")
 app.include_router(auth.router, prefix="/auth")
+app.include_router(map_api.router, prefix="/location")
