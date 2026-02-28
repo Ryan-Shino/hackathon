@@ -4,12 +4,20 @@ import StatsPage from './StatsPage';
 import LeaderboardPage from './LeaderboardPage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
+import ClassSelectionPage from './ClassSelectionPage';
 import mainBg from './assets/stardew-valley-main.avif';
+
+// Import sprite assets
+import monkSprite from './assets/sprites/monk-1.png';
+import merchantSprite from './assets/sprites/merchant-1.png';
+import knightSprite from './assets/sprites/knight-1.png';
+import alchemistSprite from './assets/sprites/alchemist-1.png';
 
 const App = () => {
   const [authState, setAuthState] = useState('login'); 
   const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [playerClass, setPlayerClass] = useState(null); 
 
   const stats = {
     level: 5,
@@ -26,17 +34,36 @@ const App = () => {
     { name: 'Social', icon: <Users size={18} /> },
   ];
 
+  // Map the chosen class to the correct imported sprite
+  const classSprites = {
+    monk: monkSprite,
+    merchant: merchantSprite,
+    knight: knightSprite,
+    alchemist: alchemistSprite,
+  };
+
   const handleNavClick = (page) => {
     setCurrentPage(page);
     setIsModalOpen(true);
   };
-
+  
   if (authState === 'login') {
     return <LoginPage onLogin={() => setAuthState('authenticated')} onNavigateRegister={() => setAuthState('register')} />;
   }
 
   if (authState === 'register') {
-    return <RegisterPage onRegister={() => setAuthState('authenticated')} onNavigateLogin={() => setAuthState('login')} />;
+    return <RegisterPage onRegister={() => setAuthState('class_selection')} onNavigateLogin={() => setAuthState('login')} />;
+  }
+
+  if (authState === 'class_selection') {
+    return (
+      <ClassSelectionPage 
+        onSelectClass={(selectedClass) => {
+          setPlayerClass(selectedClass);
+          setAuthState('authenticated');
+        }} 
+      />
+    );
   }
 
   const renderModalContent = () => {
@@ -68,12 +95,32 @@ const App = () => {
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
         }
+        /* Optional animation for the sprite to make it feel alive */
+        @keyframes idle-bob {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        .sprite-idle {
+          animation: idle-bob 2s ease-in-out infinite;
+        }
       `}</style>
 
       <div 
         className="h-screen w-full bg-cover bg-center pixel-bg relative overflow-hidden"
         style={{ backgroundImage: `url(${mainBg})` }}
       >
+        
+        {/* Centred Character Sprite */}
+        {playerClass && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+            <img 
+              src={classSprites[playerClass]} 
+              alt={`${playerClass} character`} 
+              className="w-32 h-32 pixel-bg object-contain sprite-idle drop-shadow-md"
+            />
+          </div>
+        )}
+
         {/* Main Dashboard (Bottom Left) */}
         <div className="absolute bottom-8 left-8 w-full max-w-[350px] z-10">
           <div className="pixel-scroll p-5 flex flex-col w-full border-t-[4px]">
@@ -83,7 +130,7 @@ const App = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <span className="pixel-font text-[12px] text-[#3e2723] tracking-widest">PLAYER_1</span>
-                <span className="pixel-font text-[9px] text-[#5d4037]">LVL {stats.level}</span>
+                <span className="pixel-font text-[9px] text-[#5d4037]">LVL {stats.level} {playerClass && `• ${playerClass.toUpperCase()}`}</span>
               </div>
             </div>
 
