@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Dumbbell, Library, TreePine, Users, Utensils, User, Trophy, Home, BarChart2, Zap, Brain, Heart, X, Sparkle, LogOut } from 'lucide-react';
 import StatsPage from './StatsPage';
 import LeaderboardPage from './LeaderboardPage';
@@ -51,42 +51,42 @@ const App = () => {
   ];
 
   // Poll for geolocation once authenticated
-  // useEffect(() => {
-  //   if (authState !== 'authenticated') return;
-  //
-  //   const fetchLocation = () => {
-  //     if ("geolocation" in navigator) {
-  //       navigator.geolocation.getCurrentPosition(async (position) => {
-  //         const { longitude, latitude } = position.coords;
-  //         try {
-  //           // Replace with your actual backend URL
-  //           // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
-  //           const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
-  //           const data = await response.json();
-  //
-  //           console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
-  //           console.log("Backend returned:", data);           // <-- ADD THIS
-  //
-  //           if (data.location) {
-  //             setSpriteLocation(data.location);
-  //           }
-  //         } catch (error) {
-  //           console.error("Error fetching location from backend:", error);
-  //         }
-  //       }, (error) => {
-  //         console.error("Geolocation error:", error.message);
-  //       });
-  //     } else {
-  //       console.warn("Geolocation is not supported by this browser.");
-  //     }
-  //   };
-  //
-  //   fetchLocation();
-  //
-  //   // Optional: update location every 60 seconds
-  //   const intervalId = setInterval(fetchLocation, 10000);
-  //   return () => clearInterval(intervalId);
-  // }, [authState]);
+  useEffect(() => {
+    if (authState !== 'authenticated') return;
+  
+    const fetchLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { longitude, latitude } = position.coords;
+          try {
+            // Replace with your actual backend URL
+            // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
+            const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
+            const data = await response.json();
+  
+            console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
+            console.log("Backend returned:", data);           // <-- ADD THIS
+  
+            if (data.location) {
+              setSpriteLocation(data.location);
+            }
+          } catch (error) {
+            console.error("Error fetching location from backend:", error);
+          }
+        }, (error) => {
+          console.error("Geolocation error:", error.message);
+        });
+      } else {
+        console.warn("Geolocation is not supported by this browser.");
+      }
+    };
+  
+    fetchLocation();
+  
+    // Optional: update location every 60 seconds
+    const intervalId = setInterval(fetchLocation, 10000);
+    return () => clearInterval(intervalId);
+  }, [authState]);
 
   const handleNavClick = (page) => {
     setCurrentPage(page);
