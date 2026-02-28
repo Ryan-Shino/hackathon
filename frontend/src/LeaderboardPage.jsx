@@ -31,14 +31,14 @@ const LeaderboardPage = () => {
   const sortedFriends = getSortedFriends();
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#2c1810] p-4 font-mono select-none">
+    <div className="flex flex-col w-full min-h-screen bg-[#2c1810] p-4 pixel-font select-none">
       
       {/* Pixel Header */}
       <div className="relative mb-8 mt-2">
         <div className="bg-[#5d4037] border-b-4 border-r-4 border-black p-4 flex flex-col items-center">
           <div className="flex items-center gap-3">
             <Trophy size={28} className="text-[#ffd700] drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]" />
-            <h1 className="text-2xl font-black text-[#f5f5f5] tracking-tighter uppercase italic drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+            <h1 className="text-2xl font-black text-[#f5f5f5] tracking-tighter uppercase drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
               Hall of Heroes
             </h1>
           </div>
