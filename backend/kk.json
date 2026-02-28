@@ -1,0 +1,83 @@
+{'type': 'FeatureCollection', 'features': [
+        {'type': 'Feature', 'id': 421443590, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3981229066848755,
+                    50.937708226172845
+                ]
+            }, 'properties': {'sizerank': 16, 'type': 'Post Office', 'name_script': 'Latin', 'brand': 'Post Office', 'category_en': 'Post Office', 'maki': 'post', 'category_zh-Hans': '邮局', 'filterrank': 3, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'class': 'public_facilities', 'name': 'University Post Office', 'tilequery': {'distance': 13.687366276789174, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 55463600430, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977541029453278,
+                    50.937711606640846
+                ]
+            }, 'properties': {'sizerank': 16, 'type': 'Fast Food', 'name_script': 'Latin', 'brand': 'Pret A Manger', 'category_en': 'Fast Food', 'maki': 'fast-food', 'category_zh-Hans': '快餐店', 'filterrank': 3, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'class': 'food_and_drink', 'name': 'Pret A Manger', 'tilequery': {'distance': 19.781668454445708, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 3917851971, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977232575416565,
+                    50.937880629726806
+                ]
+            }, 'properties': {'sizerank': 16, 'type': 'Parking', 'maki': 'parking', 'category_zh-Hans': '停车场', 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'category_en': 'Car Parking', 'class': 'motorist', 'tilequery': {'distance': 21.117167011840714, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 300640961, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3975971937179565,
+                    50.93774541130716
+                ]
+            }, 'properties': {'sizerank': 14, 'type': 'University', 'name_script': 'Latin', 'category_en': 'University Building', 'maki': 'marker', 'filterrank': 4, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'category_zh-Hans': '大学建筑', 'class': 'education', 'name': 'Gower', 'tilequery': {'distance': 28.767956515921547, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 2846045001, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977715373039246,
+                    50.93744792939995
+                ]
+            }, 'properties': {'sizerank': 16, 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'maki': 'toilet', 'type': 'Toilets', 'class': 'visitor_amenities', 'tilequery': {'distance': 42.43216546470167, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 2825845241, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977567851543427,
+                    50.937425111106876
+                ]
+            }, 'properties': {'sizerank': 16, 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'maki': 'toilet', 'type': 'Toilets', 'class': 'visitor_amenities', 'tilequery': {'distance': 45.17423955314051, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 2825845231, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977272808551788,
+                    50.937425111106876
+                ]
+            }, 'properties': {'sizerank': 16, 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'maki': 'toilet', 'type': 'Toilets', 'class': 'visitor_amenities', 'tilequery': {'distance': 45.988380857667295, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 39502370760, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.397349089384079,
+                    50.93773273456017
+                ]
+            }, 'properties': {'sizerank': 16, 'type': 'Cafe', 'name_script': 'Latin', 'brand': 'Costa', 'category_en': 'Cafe', 'maki': 'cafe', 'category_zh-Hans': '咖啡馆', 'filterrank': 2, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'class': 'food_and_drink', 'name': 'Costa', 'tilequery': {'distance': 46.15950389871948, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 2416199741, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977326452732086,
+                    50.93741581476206
+                ]
+            }, 'properties': {'sizerank': 16, 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'maki': 'toilet', 'type': 'Toilets', 'class': 'visitor_amenities', 'tilequery': {'distance': 46.78200572746518, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        },
+        {'type': 'Feature', 'id': 2825845251, 'geometry': {'type': 'Point', 'coordinates': [
+                    -1.3977514207363129,
+                    50.93739384157598
+                ]
+            }, 'properties': {'sizerank': 16, 'filterrank': 5, 'iso_3166_1': 'GB', 'iso_3166_2': 'GB-ENG', 'maki': 'toilet', 'type': 'Toilets', 'class': 'visitor_amenities', 'tilequery': {'distance': 48.55162092700938, 'geometry': 'point', 'layer': 'poi_label'
+                }
+            }
+        }
+    ]
+}

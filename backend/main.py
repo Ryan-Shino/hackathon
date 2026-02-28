@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import map_functions
 
 app = FastAPI()
 
@@ -10,6 +11,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
 
 @app.get('/theme')
 def get_theme(style: str = 'default'):
