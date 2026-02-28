@@ -4,5 +4,5 @@ frontend/dist/
 
 # Ignore Python dependencies
 backend/venv/
-backend/__pycache__/
+__pycache__/
 .env

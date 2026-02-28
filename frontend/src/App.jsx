@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dumbbell, Library, TreePine, Users, Utensils, User, Trophy, Home, BarChart2, Zap, Brain, Heart, X, Sparkle } from 'lucide-react';
 import StatsPage from './StatsPage';
 import LeaderboardPage from './LeaderboardPage';
@@ -18,6 +18,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [playerClass, setPlayerClass] = useState(null); 
+  const [spriteLocation, setSpriteLocation] = useState('centre'); // Default location
 
   const stats = {
     level: 5,
@@ -34,7 +35,6 @@ const App = () => {
     { name: 'Social', icon: <Users size={18} /> },
   ];
 
-  // Map the chosen class to the correct imported sprite
   const classSprites = {
     monk: monkSprite,
     merchant: merchantSprite,
@@ -42,9 +42,59 @@ const App = () => {
     alchemist: alchemistSprite,
   };
 
+  // Poll for geolocation once authenticated
+  useEffect(() => {
+    if (authState !== 'authenticated') return;
+
+    const fetchLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { longitude, latitude } = position.coords;
+          try {
+            // Replace with your actual backend URL
+            // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
+            const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
+            const data = await response.json();
+            
+            console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
+            console.log("Backend returned:", data);           // <-- ADD THIS
+
+            if (data.location) {
+              setSpriteLocation(data.location);
+            }
+          } catch (error) {
+            console.error("Error fetching location from backend:", error);
+          }
+        }, (error) => {
+          console.error("Geolocation error:", error.message);
+        });
+      } else {
+        console.warn("Geolocation is not supported by this browser.");
+      }
+    };
+
+    fetchLocation();
+    
+    // Optional: update location every 60 seconds
+    const intervalId = setInterval(fetchLocation, 10000);
+    return () => clearInterval(intervalId);
+  }, [authState]);
+
   const handleNavClick = (page) => {
     setCurrentPage(page);
     setIsModalOpen(true);
+  };
+
+  // Maps the backend location string to Tailwind CSS positioning classes
+  // Avoids the UI areas (bottom-left dashboard, right-side nav)
+  const getSpritePositionStyles = (location) => {
+    switch (location) {
+      case 'exercise': return 'top-12 left-12';
+      case 'learning': return 'top-12 right-24';
+      case 'nature': return 'bottom-12 left-1/2 -translate-x-1/2';
+      case 'social': return 'bottom-1/2 left-3/4 -translate-x-1/2';
+      default: return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'; // Centre
+    }
   };
   
   if (authState === 'login') {
@@ -95,7 +145,6 @@ const App = () => {
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
         }
-        /* Optional animation for the sprite to make it feel alive */
         @keyframes idle-bob {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-4px); }
@@ -110,9 +159,9 @@ const App = () => {
         style={{ backgroundImage: `url(${mainBg})` }}
       >
         
-        {/* Centred Character Sprite */}
+        {/* Character Sprite with Dynamic Positioning */}
         {playerClass && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+          <div className={`absolute transition-all duration-1000 ease-in-out pointer-events-none z-20 ${getSpritePositionStyles(spriteLocation)}`}>
             <img 
               src={classSprites[playerClass]} 
               alt={`${playerClass} character`} 
@@ -136,7 +185,7 @@ const App = () => {
 
             <div className="flex flex-wrap gap-2.5 justify-center sm:justify-start border-b-2 border-[#5d4037]/40 pb-5 mb-4">
               {locations.map((loc, index) => (
-                <div key={index} className="bg-[#e2c792] pixel-box flex items-center gap-2 px-2.5 py-1.5 cursor-pointer text-[#3e2723] hover:bg-[#f4d3a2]">
+                <div key={index} className={`bg-[#e2c792] pixel-box flex items-center gap-2 px-2.5 py-1.5 cursor-pointer text-[#3e2723] hover:bg-[#f4d3a2] ${spriteLocation === loc.name.toLowerCase() ? 'ring-2 ring-white' : ''}`}>
                   <div className="shrink-0">{loc.icon}</div>
                   <span className="pixel-font text-[7px] font-bold tracking-wider pt-0.5">{loc.name.toUpperCase()}</span>
                 </div>
