@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
-
-from ..controllers.user_controller import UserController
 from ..dependencies import get_db
+from ..controllers.user_controller import UserController
 
 router = APIRouter()
 
@@ -9,6 +8,4 @@ router = APIRouter()
 @router.get("/{username}")
 def get_user(username: str, db=Depends(get_db)):
     controller = UserController(db)
-    return controller.get_user_by_username(username)
-
-@router.get("/")
+    return controller.get_user(username)
