@@ -1,8 +1,8 @@
 // File 2: StatsPage.jsx
 import React from 'react';
-import { ArrowLeft, Shield, Star, Zap, Brain, Heart, Users } from 'lucide-react';
+import { Shield, Star, Zap, Brain, Heart, Users } from 'lucide-react';
 
-const StatsPage = ({ onBack }) => {
+const StatsPage = () => {
   const playerProfile = {
     level: 5,
     playerClass: "Socialite",
@@ -10,89 +10,74 @@ const StatsPage = ({ onBack }) => {
   };
 
   const stats = [
-    { name: 'Strength', current: 10, nextLevel: 15, icon: <Zap size={18} className="text-red-400" />, barColour: 'bg-red-500' },
-    { name: 'Intelligence', current: 12, nextLevel: 20, icon: <Brain size={18} className="text-blue-400" />, barColour: 'bg-blue-500' },
-    { name: 'Stamina', current: 8, nextLevel: 10, icon: <Heart size={18} className="text-green-400" />, barColour: 'bg-green-500' },
-    { name: 'Charisma', current: 15, nextLevel: 15, icon: <Users size={18} className="text-yellow-400" />, barColour: 'bg-yellow-500' },
+    { name: 'Strength', current: 10, nextLevel: 15, icon: <Zap size={18} className="text-white" /> },
+    { name: 'Intelligence', current: 12, nextLevel: 20, icon: <Brain size={18} className="text-white" /> },
+    { name: 'Stamina', current: 8, nextLevel: 10, icon: <Heart size={18} className="text-white" /> },
+    { name: 'Charisma', current: 15, nextLevel: 15, icon: <Users size={18} className="text-white" /> },
   ];
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-800 text-slate-50 font-sans">
-      <div className="flex flex-col w-full max-w-[400px] h-[650px] bg-slate-900 rounded-[20px] shadow-[0_10px_25px_rgba(0,0,0,0.5)] overflow-hidden">
-        
-        {/* Header Section */}
-        <div className="bg-slate-800 p-5 flex items-center border-b border-slate-700">
-          <button 
-            onClick={onBack}
-            className="text-slate-400 hover:text-white transition-colors cursor-pointer bg-transparent border-none p-0 flex items-center justify-center"
-          >
-            <ArrowLeft size={24} />
-          </button>
-          <h1 className="flex-1 text-center text-xl font-bold m-0 mr-6">Character Profile</h1>
+    <div className="flex flex-col w-full min-h-full p-5 text-white">
+      
+      {/* Header */}
+      <h1 className="text-center text-2xl font-bold mb-6 glow-text tracking-wider uppercase">Profile</h1>
+
+      {/* Identity Card - Reduced borders and shadows */}
+      <div className="bg-white/5 border border-white/10 p-5 rounded-xl shadow-[0_0_10px_rgba(0,0,0,0.5)] mb-8 flex items-center gap-4 backdrop-blur-sm">
+        <div className="w-[60px] h-[60px] bg-white/5 border border-white/20 rounded-full flex justify-center items-center shadow-[0_0_10px_rgba(255,255,255,0.2)] glow-number">
+          <Shield size={32} className="text-white" />
         </div>
-
-        <div className="p-6 overflow-y-auto">
-          {/* Identity Card */}
-          <div className="bg-gradient-to-br from-indigo-900 to-slate-800 p-5 rounded-xl shadow-lg mb-6 border border-indigo-500/30 flex items-center gap-4">
-            <div className="w-[60px] h-[60px] bg-indigo-500 rounded-full flex justify-center items-center shadow-[0_0_15px_rgba(99,102,241,0.5)]">
-              <Shield size={32} className="text-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                <h2 className="text-lg font-bold m-0">Level {playerProfile.level}</h2>
-              </div>
-              <p className="text-indigo-200 text-sm font-semibold m-0">{playerProfile.playerClass}</p>
-              <p className="text-slate-400 text-xs italic m-0">"{playerProfile.title}"</p>
-            </div>
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <Star size={16} className="text-white fill-white glow-number" />
+            <h2 className="text-lg font-bold m-0 glow-text">Level {playerProfile.level}</h2>
           </div>
+          <p className="text-white/80 text-sm font-semibold m-0">{playerProfile.playerClass}</p>
+          <p className="text-white/50 text-xs italic m-0">"{playerProfile.title}"</p>
+        </div>
+      </div>
 
-          {/* Stats Breakdown */}
-          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-700 pb-2">
-            Attribute Progression
-          </h3>
-          
-          <div className="flex flex-col gap-5">
-            {stats.map((stat, index) => {
-              const progressPercentage = Math.min((stat.current / stat.nextLevel) * 100, 100);
-              const pointsNeeded = stat.nextLevel - stat.current;
-              const isMaxed = pointsNeeded === 0;
+      {/* Stats Breakdown */}
+      <h3 className="text-xs font-bold text-white/60 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">
+        Attribute Progression
+      </h3>
+      
+      <div className="flex flex-col gap-5 pb-6">
+        {stats.map((stat, index) => {
+          const progressPercentage = Math.min((stat.current / stat.nextLevel) * 100, 100);
+          const pointsNeeded = stat.nextLevel - stat.current;
+          const isMaxed = pointsNeeded === 0;
 
-              return (
-                <div key={index} className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="flex items-center gap-2">
-                      {stat.icon}
-                      <span className="font-bold text-slate-200">{stat.name}</span>
-                    </div>
-                    <div className="text-sm font-bold">
-                      <span className="text-white">{stat.current}</span>
-                      <span className="text-slate-500"> / {stat.nextLevel}</span>
-                    </div>
-                  </div>
-                  
-                  {/* Progress Bar Container */}
-                  <div className="w-full bg-slate-700 rounded-full h-2.5 mb-2 overflow-hidden">
-                    <div 
-                      className={`h-2.5 rounded-full ${stat.barColour} transition-all duration-500 ease-out`} 
-                      style={{ width: `${progressPercentage}%` }}
-                    ></div>
-                  </div>
-                  
-                  {/* Points Needed Text */}
-                  <div className="text-right text-xs font-medium">
-                    {isMaxed ? (
-                      <span className="text-green-400">Ready to level up!</span>
-                    ) : (
-                      <span className="text-slate-400">{pointsNeeded} points needed</span>
-                    )}
-                  </div>
+          return (
+            <div key={index} className="bg-white/5 p-4 rounded-lg border border-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
+              <div className="flex justify-between items-center mb-3">
+                <div className="flex items-center gap-2 glow-text">
+                  {stat.icon}
+                  <span className="font-bold text-white tracking-wide">{stat.name}</span>
                 </div>
-              );
-            })}
-          </div>
-
-        </div>
+                <div className="text-sm font-bold glow-number">
+                  <span className="text-white">{stat.current}</span>
+                  <span className="text-white/40"> / {stat.nextLevel}</span>
+                </div>
+              </div>
+              
+              <div className="w-full bg-black/40 rounded-full h-1.5 mb-2 overflow-hidden shadow-inner">
+                <div 
+                  className="h-1.5 rounded-full bg-white shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-all duration-1000 ease-out" 
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+              
+              <div className="text-right text-[10px] font-bold tracking-wider uppercase">
+                {isMaxed ? (
+                  <span className="text-white glow-text">Ready to level up</span>
+                ) : (
+                  <span className="text-white/50">{pointsNeeded} points needed</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
