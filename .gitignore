@@ -4,6 +4,7 @@ frontend/dist/
 
 # Ignore Python dependencies
 backend/controllers/__pycache__/
+backend/controllers/mapBoxToken.py
 backend/venv/
 __pycache__/
 .env

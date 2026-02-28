@@ -1,10 +1,11 @@
 import os
 import requests
+from .mapBoxToken import TOKEN
 
 def decode_coords(long: float, lat: float) -> str:
     # Security Note: It is highly recommended to store your Mapbox token in an environment variable 
     # rather than hardcoding it, to prevent accidental exposure of your private key.
-    mapbox_token = os.environ.get("MAPBOX_TOKEN", "sk.eyJ1IjoibWkxeG4iLCJhIjoiY21tNjl0bjJ6MGI2ZDJxcXkycmg2bHJ3aSJ9.x9jypoSNjEyhvDzSx9iRrg")
+    mapbox_token = os.environ.get("MAPBOX_TOKEN", TOKEN)
     
     url = f"https://api.mapbox.com/v4/mapbox.mapbox-streets-v8/tilequery/{long},{lat}.json"
 
