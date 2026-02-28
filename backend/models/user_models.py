@@ -15,6 +15,5 @@ class UserResponse(BaseModel):
     username: str
     social_stat: float | None = None
     exercise_stat: float | None = None
-    library_stat: float | None = None
-    food_stat: float | None = None
-    park_stat: float | None = None
+    learning_stat: float | None = None
+    nature_stat: float | None = None

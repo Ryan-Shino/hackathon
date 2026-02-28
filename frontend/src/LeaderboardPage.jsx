@@ -5,19 +5,19 @@ const LeaderboardPage = () => {
   const [activeTab, setActiveTab] = useState('Overall');
 
   const friendsData = [
-    { id: 1, name: "Alex (You)", level: 5, strength: 10, intelligence: 12, stamina: 8, charisma: 15, isMe: true },
-    { id: 2, name: "Sarah", level: 6, strength: 14, intelligence: 9, stamina: 12, charisma: 10, isMe: false },
-    { id: 3, name: "Jordan", level: 4, strength: 8, intelligence: 15, stamina: 6, charisma: 12, isMe: false },
-    { id: 4, name: "Taylor", level: 7, strength: 16, intelligence: 14, stamina: 15, charisma: 8, isMe: false },
-    { id: 5, name: "Casey", level: 5, strength: 11, intelligence: 11, stamina: 10, charisma: 14, isMe: false },
-    { id: 6, name: "Morgan", level: 3, strength: 6, intelligence: 8, stamina: 7, charisma: 18, isMe: false },
+    { id: 1, name: "Alex (You)", level: 5, strength: 10, intelligence: 12, wellbeing: 8, charisma: 15, isMe: true },
+    { id: 2, name: "Sarah", level: 6, strength: 14, intelligence: 9, wellbeing: 12, charisma: 10, isMe: false },
+    { id: 3, name: "Jordan", level: 4, strength: 8, intelligence: 15, wellbeing: 6, charisma: 12, isMe: false },
+    { id: 4, name: "Taylor", level: 7, strength: 16, intelligence: 14, wellbeing: 15, charisma: 8, isMe: false },
+    { id: 5, name: "Casey", level: 5, strength: 11, intelligence: 11, wellbeing: 10, charisma: 14, isMe: false },
+    { id: 6, name: "Morgan", level: 3, strength: 6, intelligence: 8, wellbeing: 7, charisma: 18, isMe: false },
   ];
 
   const categories = [
     { name: 'Overall', icon: <Trophy size={14} />, color: 'text-yellow-400' },
     { name: 'Strength', icon: <Sword size={14} />, color: 'text-red-500' },
     { name: 'Intelligence', icon: <BookOpen size={14} />, color: 'text-blue-400' },
-    { name: 'Stamina', icon: <Heart size={14} />, color: 'text-green-400' },
+    { name: 'Wellbeing', icon: <Heart size={14} />, color: 'text-green-400' },
     { name: 'Charisma', icon: <Sparkles size={14} />, color: 'text-purple-400' },
   ];
 

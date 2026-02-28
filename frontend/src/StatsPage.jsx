@@ -11,7 +11,7 @@ const StatsPage = () => {
   const stats = [
     { name: 'Strength', current: 10, nextLevel: 15, icon: <Zap size={18} />, color: 'text-red-500' },
     { name: 'Intelligence', current: 12, nextLevel: 20, icon: <Brain size={18} />, color: 'text-blue-400' },
-    { name: 'Stamina', current: 8, nextLevel: 10, icon: <Heart size={18} />, color: 'text-green-400' },
+    { name: 'Wellbeing', current: 8, nextLevel: 10, icon: <Heart size={18} />, color: 'text-green-400' },
     { name: 'Charisma', current: 15, nextLevel: 15, icon: <Users size={18} />, color: 'text-purple-400' },
   ];
 

@@ -6,7 +6,7 @@ class UserController:
         cursor = self.conn.cursor()
         cursor.execute(
             """
-            SELECT username, social_stat, exercise_stat, library_stat, food_stat, park_stat
+            SELECT username, exercise_stat, learning_stat, social_stat, nature_stat
             FROM users
             WHERE username = ?
             """,
