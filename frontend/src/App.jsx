@@ -17,7 +17,7 @@ const App = () => {
   const [authState, setAuthState] = useState('login');
   const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [playerClass, setPlayerClass] = useState(null); 
+  const [playerClass, setPlayerClass] = useState(null);
   const [spriteLocation, setSpriteLocation] = useState('centre'); // Default location
 
   const stats = {
@@ -43,6 +43,14 @@ const App = () => {
     alchemist: alchemistSprite,
   };
 
+  {/* Location Boxes */ }
+  const locationBoxes = [
+    { id: 'exercise', label: 'EXERCISE', icon: <Dumbbell size={16} />, top: '10%', left: '53%' },
+    { id: 'nature', label: 'NATURE', icon: <TreePine size={16} />, top: '15%', left: '10.5%'  },
+    { id: 'social', label: 'SOCIAL', icon: <Users size={16} />, top: '20%', left: '77%'  },
+    { id: 'learning', label: 'LEARNING', icon: <Library size={16} />, top: '63%', left: '39%'  },
+  ];
+
   // Poll for geolocation once authenticated
   useEffect(() => {
     if (authState !== 'authenticated') return;
@@ -56,7 +64,7 @@ const App = () => {
             // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
             const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
             const data = await response.json();
-            
+
             console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
             console.log("Backend returned:", data);           // <-- ADD THIS
 
@@ -75,7 +83,7 @@ const App = () => {
     };
 
     fetchLocation();
-    
+
     // Optional: update location every 60 seconds
     const intervalId = setInterval(fetchLocation, 10000);
     return () => clearInterval(intervalId);
@@ -97,7 +105,7 @@ const App = () => {
       default: return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'; // Centre
     }
   };
-  
+
   if (authState === 'login') {
     return <LoginPage onLogin={() => setAuthState('authenticated')} onNavigateRegister={() => setAuthState('register')} />;
   }
@@ -108,11 +116,11 @@ const App = () => {
 
   if (authState === 'class_selection') {
     return (
-      <ClassSelectionPage 
+      <ClassSelectionPage
         onSelectClass={(selectedClass) => {
           setPlayerClass(selectedClass);
           setAuthState('authenticated');
-        }} 
+        }}
       />
     );
   }
@@ -134,6 +142,7 @@ const App = () => {
         }
         .pixel-scroll {
           background-color: #e2c792;
+
           box-shadow: 
             -4px 0 0 0 #5d4037, 4px 0 0 0 #5d4037, 0 -4px 0 0 #5d4037, 0 4px 0 0 #5d4037,
             inset -4px -4px 0 0 #c2a36b, inset 4px 4px 0 0 #f4d3a2;
@@ -155,21 +164,34 @@ const App = () => {
         }
       `}</style>
 
-      <div 
+      <div
         className="h-screen w-full bg-cover bg-center pixel-bg relative overflow-hidden"
         style={{ backgroundImage: `url(${mainBg})` }}
       >
-        
+
         {/* Character Sprite with Dynamic Positioning */}
         {playerClass && (
           <div className={`absolute transition-all duration-1000 ease-in-out pointer-events-none z-20 ${getSpritePositionStyles(spriteLocation)}`}>
-            <img 
-              src={classSprites[playerClass]} 
-              alt={`${playerClass} character`} 
+            <img
+              src={classSprites[playerClass]}
+              alt={`${playerClass} character`}
               className="w-32 h-32 pixel-bg object-contain sprite-idle drop-shadow-md"
             />
           </div>
         )}
+
+        {locationBoxes.map((box) => (
+          <div
+            key={box.id}
+            style={{ top: box.top, left: box.left }}
+            className="absolute z-10 pointer-events-none sprite-idle"
+          >
+            <div className="pixel-scroll px-3 py-2 flex flex-col items-center gap-1">
+              <div className="text-[#3e2723]">{box.icon}</div>
+              <span className="pixel-font text-[6px] text-[#3e2723] tracking-widest">{box.label}</span>
+            </div>
+          </div>
+        ))}
 
         {/* Main Dashboard (Bottom Left) */}
         <div className="absolute bottom-8 left-8 w-full max-w-[350px] z-10">
@@ -195,19 +217,19 @@ const App = () => {
 
             <div className="grid grid-cols-2 gap-4 w-full">
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
-                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Zap size={18} className="text-yellow-600"/> STR</div>
+                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Zap size={18} className="text-yellow-600" /> STR</div>
                 <span className="pixel-font text-[12px] text-[#3e2723]">{stats.strength}</span>
               </div>
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
-                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Brain size={18} className="text-blue-600"/> INT</div>
+                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Brain size={18} className="text-blue-600" /> INT</div>
                 <span className="pixel-font text-[12px] text-[#3e2723]">{stats.intelligence}</span>
               </div>
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
-                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Heart size={18} className="text-red-600"/> WEL</div>
+                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Heart size={18} className="text-red-600" /> WEL</div>
                 <span className="pixel-font text-[12px] text-[#3e2723]">{stats.wellbeing}</span>
               </div>
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
-                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Sparkle size={18} className="text-green-600"/> CHA</div>
+                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Sparkle size={18} className="text-green-600" /> CHA</div>
                 <span className="pixel-font text-[12px] text-[#3e2723]">{stats.charisma}</span>
               </div>
             </div>
@@ -220,12 +242,12 @@ const App = () => {
             <Home size={24} />
             <span className="pixel-font text-[6px] mt-2 tracking-wider">MAP</span>
           </button>
-          
+
           <button onClick={() => handleNavClick('stats')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'stats' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
             <BarChart2 size={24} />
             <span className="pixel-font text-[6px] mt-2 tracking-wider">STATS</span>
           </button>
-          
+
           <button onClick={() => handleNavClick('leaderboard')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'leaderboard' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
             <Trophy size={24} />
             <span className="pixel-font text-[6px] mt-2 tracking-wider">RANKS</span>
@@ -236,7 +258,7 @@ const App = () => {
         {isModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 modal-overlay">
             <div className="relative w-full max-w-2xl max-h-[80vh] pixel-scroll p-8 overflow-y-auto">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 text-[#3e2723] hover:scale-110 transition-transform"
               >

@@ -76,17 +76,6 @@ const RegisterPage = ({ onRegister, onNavigateLogin }) => {
 
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
 
-              <div className="flex flex-col gap-2">
-                <label className="pixel-font text-[7px] text-white/80 uppercase tracking-widest">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-black/50 border-2 border-white/50 text-white pixel-font text-[9px] p-2.5 focus:outline-none focus:border-white transition-colors"
-                  placeholder="player@email.com"
-                  required
-                />
-              </div>
 
               <div className="flex flex-col gap-2">
                 <label className="pixel-font text-[7px] text-white/80 uppercase tracking-widest">Username</label>
