@@ -24,8 +24,7 @@ const RegisterPage = ({ onRegister, onNavigateLogin }) => {
       });
 
       if (response.ok) {
-        alert("Save Created! Please login.");
-        onNavigateLogin(); // Redirect to login page after success
+        onRegister();
       } else {
         const errorData = await response.json();
         alert(`Registration failed: ${errorData.detail || 'Unknown error'}`);
