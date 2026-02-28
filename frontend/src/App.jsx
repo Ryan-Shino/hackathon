@@ -106,7 +106,7 @@ const App = () => {
   };
 
   if (authState === 'login') {
-    return <LoginPage onLogin={() => setAuthState('authenticated')} onNavigateRegister={() => setAuthState('register')} />;
+    return <LoginPage onLogin={() => setAuthState('class_selection')} onNavigateRegister={() => setAuthState('register')} />;
   }
 
   if (authState === 'register') {
