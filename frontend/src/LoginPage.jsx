@@ -55,7 +55,7 @@ const LoginPage = ({ onLogin, onNavigateRegister }) => {
         className="flex justify-center items-center h-screen w-full bg-cover bg-center pixel-bg relative"
         style={{ backgroundImage: `url(${stardewBg})` }}
       >
-        <div className="relative flex flex-col justify-center items-center w-full max-w-[400px] h-[100dvh] sm:h-[650px] sm:border-4 sm:border-white sm:rounded-none overflow-hidden">
+        <div className="relative flex flex-col justify-center items-center w-full max-w-[400px] h-[100dvh] sm:h-[650px] sm:border-4 sm:border-transparent sm:rounded-none overflow-hidden">
 
           <div className="bg-[#1a1c29]/80 backdrop-blur-sm p-8 w-[85%] pixel-box flex flex-col items-center z-10">
 
