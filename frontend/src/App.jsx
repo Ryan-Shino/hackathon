@@ -97,10 +97,10 @@ const App = () => {
   // Avoids the UI areas (bottom-left dashboard, right-side nav)
   const getSpritePositionStyles = (location) => {
     switch (location) {
-      case 'exercise': return 'top-12 left-12';
-      case 'learning': return 'top-12 right-24';
-      case 'nature': return 'bottom-12 left-1/2 -translate-x-1/2';
-      case 'social': return 'bottom-1/2 left-3/4 -translate-x-1/2';
+      case 'exercise': return 'top-30/100 left-1/2';
+      case 'learning': return 'top-52/100 left-39/100';
+      case 'nature': return 'top-30 left-10/100 -translate-x-1/2';
+      case 'social': return 'top-1/2 left-3/4 -translate-x-1/2';
       default: return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'; // Centre
     }
   };
