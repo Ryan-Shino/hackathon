@@ -8,10 +8,10 @@ import ClassSelectionPage from './ClassSelectionPage';
 import mainBg from './assets/stardew-valley-main.avif';
 
 // Import sprite assets
-import monkSprite from './assets/sprites/monk-1.png';
-import merchantSprite from './assets/sprites/merchant-1.png';
-import knightSprite from './assets/sprites/knight-1.png';
-import alchemistSprite from './assets/sprites/alchemist-1.png';
+import monkSprite from './assets/sprites/monk.png';
+import merchantSprite from './assets/sprites/merchant.png';
+import knightSprite from './assets/sprites/knight.png';
+import alchemistSprite from './assets/sprites/alchemist.png';
 
 const App = () => {
   const [authState, setAuthState] = useState('login'); 
@@ -23,7 +23,7 @@ const App = () => {
     level: 5,
     strength: 10,
     intelligence: 12,
-    stamina: 8,
+    wellbeing: 8,
     charisma: 15,
   };
 
@@ -153,8 +153,8 @@ const App = () => {
                 <span className="pixel-font text-[12px] text-[#3e2723]">{stats.intelligence}</span>
               </div>
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
-                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Heart size={18} className="text-red-600"/> STA</div>
-                <span className="pixel-font text-[12px] text-[#3e2723]">{stats.stamina}</span>
+                <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Heart size={18} className="text-red-600"/> WEL</div>
+                <span className="pixel-font text-[12px] text-[#3e2723]">{stats.wellbeing}</span>
               </div>
               <div className="flex items-center justify-between bg-[#d4b57e] pixel-box p-3">
                 <div className="flex items-center gap-2 pixel-font text-[9px] text-[#3e2723]"><Sparkle size={18} className="text-green-600"/> CHA</div>

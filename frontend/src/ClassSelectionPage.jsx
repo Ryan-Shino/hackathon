@@ -3,10 +3,10 @@ import { TreePine, Users, Dumbbell, Library } from 'lucide-react';
 import stardewBg from './assets/stardew-valley-login.jpg';
 
 // Import sprite assets
-import monkSprite from './assets/sprites/monk-1.png';
-import merchantSprite from './assets/sprites/merchant-1.png';
-import knightSprite from './assets/sprites/knight-1.png';
-import alchemistSprite from './assets/sprites/alchemist-1.png';
+import monkSprite from './assets/sprites/monk.png';
+import merchantSprite from './assets/sprites/merchant.png';
+import knightSprite from './assets/sprites/knight.png';
+import alchemistSprite from './assets/sprites/alchemist.png';
 
 const ClassSelectionPage = ({ onSelectClass }) => {
   const [selectedId, setSelectedId] = useState(null);
