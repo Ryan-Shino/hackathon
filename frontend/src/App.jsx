@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Dumbbell, Library, TreePine, Users, Utensils, User, Trophy, Home, BarChart2, Zap, Brain, Heart, X, Sparkle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Dumbbell, Library, TreePine, Users, Utensils, User, Trophy, Home, BarChart2, Zap, Brain, Heart, X, Sparkle, LogOut } from 'lucide-react';
 import StatsPage from './StatsPage';
 import LeaderboardPage from './LeaderboardPage';
 import LoginPage from './LoginPage';
@@ -28,7 +28,6 @@ const App = () => {
     charisma: 15,
   };
 
-
   const locations = [
     { name: 'Exercise', icon: <Dumbbell size={18} /> },
     { name: 'Learning', icon: <Library size={18} /> },
@@ -52,42 +51,42 @@ const App = () => {
   ];
 
   // Poll for geolocation once authenticated
-  useEffect(() => {
-    if (authState !== 'authenticated') return;
-
-    const fetchLocation = () => {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const { longitude, latitude } = position.coords;
-          try {
-            // Replace with your actual backend URL
-            // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
-            const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
-            const data = await response.json();
-
-            console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
-            console.log("Backend returned:", data);           // <-- ADD THIS
-
-            if (data.location) {
-              setSpriteLocation(data.location);
-            }
-          } catch (error) {
-            console.error("Error fetching location from backend:", error);
-          }
-        }, (error) => {
-          console.error("Geolocation error:", error.message);
-        });
-      } else {
-        console.warn("Geolocation is not supported by this browser.");
-      }
-    };
-
-    fetchLocation();
-
-    // Optional: update location every 60 seconds
-    const intervalId = setInterval(fetchLocation, 10000);
-    return () => clearInterval(intervalId);
-  }, [authState]);
+  // useEffect(() => {
+  //   if (authState !== 'authenticated') return;
+  //
+  //   const fetchLocation = () => {
+  //     if ("geolocation" in navigator) {
+  //       navigator.geolocation.getCurrentPosition(async (position) => {
+  //         const { longitude, latitude } = position.coords;
+  //         try {
+  //           // Replace with your actual backend URL
+  //           // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
+  //           const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
+  //           const data = await response.json();
+  //
+  //           console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
+  //           console.log("Backend returned:", data);           // <-- ADD THIS
+  //
+  //           if (data.location) {
+  //             setSpriteLocation(data.location);
+  //           }
+  //         } catch (error) {
+  //           console.error("Error fetching location from backend:", error);
+  //         }
+  //       }, (error) => {
+  //         console.error("Geolocation error:", error.message);
+  //       });
+  //     } else {
+  //       console.warn("Geolocation is not supported by this browser.");
+  //     }
+  //   };
+  //
+  //   fetchLocation();
+  //
+  //   // Optional: update location every 60 seconds
+  //   const intervalId = setInterval(fetchLocation, 10000);
+  //   return () => clearInterval(intervalId);
+  // }, [authState]);
 
   const handleNavClick = (page) => {
     setCurrentPage(page);
@@ -168,7 +167,6 @@ const App = () => {
         className="h-screen w-full bg-cover bg-center pixel-bg relative overflow-hidden"
         style={{ backgroundImage: `url(${mainBg})` }}
       >
-
         {/* Character Sprite with Dynamic Positioning */}
         {playerClass && (
           <div className={`absolute transition-all duration-1000 ease-in-out pointer-events-none z-20 ${getSpritePositionStyles(spriteLocation)}`}>
@@ -208,7 +206,7 @@ const App = () => {
 
             <div className="flex flex-wrap gap-2.5 justify-center sm:justify-start border-b-2 border-[#5d4037]/40 pb-5 mb-4">
               {locations.map((loc, index) => (
-                <div key={index} className={`bg-[#e2c792] pixel-box flex items-center gap-2 px-2.5 py-1.5 cursor-pointer text-[#3e2723] hover:bg-[#f4d3a2] ${spriteLocation === loc.name.toLowerCase() ? 'ring-2 ring-white' : ''}`}>
+                <div key={index} className="bg-[#e2c792] pixel-box flex items-center gap-2 px-2.5 py-1.5 cursor-pointer text-[#3e2723] hover:bg-[#f4d3a2]">
                   <div className="shrink-0">{loc.icon}</div>
                   <span className="pixel-font text-[7px] font-bold tracking-wider pt-0.5">{loc.name.toUpperCase()}</span>
                 </div>
@@ -236,21 +234,34 @@ const App = () => {
           </div>
         </div>
 
-        {/* Floating Right Navigation */}
-        <nav className="absolute right-0 top-0 h-full w-[70px] bg-[#3e2723] pixel-nav-right flex flex-col justify-center gap-10 items-center z-50">
-          <button onClick={() => setIsModalOpen(false)} className={`flex flex-col items-center justify-center w-full transition-colors ${!isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
-            <Home size={24} />
-            <span className="pixel-font text-[6px] mt-2 tracking-wider">MAP</span>
-          </button>
+        {/* Right Navigation */}
+        <nav className="absolute right-0 top-0 h-full w-[70px] bg-[#3e2723] pixel-nav-right flex flex-col justify-between items-center z-50 py-10">
+          
+          {/* Main Navigation Icons */}
+          <div className="flex flex-col gap-10 items-center w-full">
+            <button onClick={() => setIsModalOpen(false)} className={`flex flex-col items-center justify-center w-full transition-colors ${!isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
+              <Home size={24} />
+              <span className="pixel-font text-[6px] mt-2 tracking-wider">MAP</span>
+            </button>
+            
+            <button onClick={() => handleNavClick('stats')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'stats' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
+              <BarChart2 size={24} />
+              <span className="pixel-font text-[6px] mt-2 tracking-wider">STATS</span>
+            </button>
+            
+            <button onClick={() => handleNavClick('leaderboard')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'leaderboard' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
+              <Trophy size={24} />
+              <span className="pixel-font text-[6px] mt-2 tracking-wider">RANKS</span>
+            </button>
+          </div>
 
-          <button onClick={() => handleNavClick('stats')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'stats' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
-            <BarChart2 size={24} />
-            <span className="pixel-font text-[6px] mt-2 tracking-wider">STATS</span>
-          </button>
-
-          <button onClick={() => handleNavClick('leaderboard')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'leaderboard' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
-            <Trophy size={24} />
-            <span className="pixel-font text-[6px] mt-2 tracking-wider">RANKS</span>
+          {/* Logout Button (Pinned to Bottom) */}
+          <button 
+            onClick={() => setAuthState('login')} 
+            className="flex flex-col items-center justify-center w-full text-[#a67c52] hover:text-red-400 transition-colors group"
+          >
+            <LogOut size={24} className="group-hover:translate-x-1 transition-transform" />
+            <span className="pixel-font text-[6px] mt-2 tracking-wider">LOG OUT</span>
           </button>
         </nav>
 
