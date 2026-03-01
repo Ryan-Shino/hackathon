@@ -4,6 +4,32 @@ It's a gamified way of getting outside and being social, with pixel art inspired
 
 We used react and tailwind css for the frontend, with a backend in python using FastAPI.
 
+## App Preview
+The user's real world geolocation is categorised into 1 of four categories:
+- Social (cafes, shopping, etc.)
+- Nature (parks, open spaces)
+- Exercise (gyms, sports facilities)
+- Learning (libraries, education facilities)
+
+When the user is at a "social" location the main screen of the app is shown here, with the user's sprite at the house on the right
+
+![Main App](images/main_app.png)
+
+There are stats in each category that can be used to "level up", which are shown here:
+
+![Stats](images/stats.png)
+
+Users can compete with their friends in different categories, or overall:
+
+![Leaderboard](images/leaderboard.png)
+
+And users can log in or register, and choose their path. Their path allows them to gain more points for certain activities, e.g. the knight earns more points from exercising.
+
+![Path Selector](images/path_selector.png)
+
+![Login](images/login.png)
+
+
 ## Setup and Running It Yourself
 
 ### Project Setup
