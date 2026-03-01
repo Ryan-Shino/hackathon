@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dumbbell, Library, TreePine, Users, Utensils, User, Trophy, Home, BarChart2, Zap, Brain, Heart, X, Sparkle, LogOut } from 'lucide-react';
 import StatsPage from './StatsPage';
 import LeaderboardPage from './LeaderboardPage';
@@ -18,7 +18,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [playerClass, setPlayerClass] = useState(null);
-  const [spriteLocation, setSpriteLocation] = useState('centre'); // Default location
+  const [spriteLocation, setSpriteLocation] = useState('centre');
 
   const stats = {
     level: 5,
@@ -42,31 +42,29 @@ const App = () => {
     alchemist: alchemistSprite,
   };
 
-  {/* Location Boxes */ }
+  {/* location boxes */ }
   const locationBoxes = [
     { id: 'exercise', label: 'EXERCISE', icon: <Dumbbell size={16} />, top: '10%', left: '53%' },
-    { id: 'nature', label: 'NATURE', icon: <TreePine size={16} />, top: '15%', left: '10.5%'  },
-    { id: 'social', label: 'SOCIAL', icon: <Users size={16} />, top: '20%', left: '77%'  },
-    { id: 'learning', label: 'LEARNING', icon: <Library size={16} />, top: '63%', left: '39%'  },
+    { id: 'nature', label: 'NATURE', icon: <TreePine size={16} />, top: '15%', left: '10.5%' },
+    { id: 'social', label: 'SOCIAL', icon: <Users size={16} />, top: '20%', left: '77%' },
+    { id: 'learning', label: 'LEARNING', icon: <Library size={16} />, top: '63%', left: '39%' },
   ];
 
-  // Poll for geolocation once authenticated
+  // poll for geolocation once authenticated
   useEffect(() => {
     if (authState !== 'authenticated') return;
-  
+
     const fetchLocation = () => {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const { longitude, latitude } = position.coords;
           try {
-            // Replace with your actual backend URL
-            // Inside your useEffect hook, ensure the fetch URL looks exactly like this:
             const response = await fetch(`http://localhost:8000/location?long=${longitude}&lat=${latitude}`);
             const data = await response.json();
-  
-            console.log("Sent coords:", longitude, latitude); // <-- ADD THIS
-            console.log("Backend returned:", data);           // <-- ADD THIS
-  
+
+            console.log("Sent coords:", longitude, latitude);
+            console.log("Backend returned:", data);
+
             if (data.location) {
               setSpriteLocation(data.location);
             }
@@ -80,10 +78,9 @@ const App = () => {
         console.warn("Geolocation is not supported by this browser.");
       }
     };
-  
+
     fetchLocation();
-  
-    // Optional: update location every 60 seconds
+
     const intervalId = setInterval(fetchLocation, 10000);
     return () => clearInterval(intervalId);
   }, [authState]);
@@ -93,8 +90,7 @@ const App = () => {
     setIsModalOpen(true);
   };
 
-  // Maps the backend location string to Tailwind CSS positioning classes
-  // Avoids the UI areas (bottom-left dashboard, right-side nav)
+  // maps the backend location to tailwind positioning classes
   const getSpritePositionStyles = (location) => {
     switch (location) {
       case 'exercise': return 'top-30/100 left-1/2';
@@ -167,7 +163,7 @@ const App = () => {
         className="h-screen w-full bg-cover bg-center pixel-bg relative overflow-hidden"
         style={{ backgroundImage: `url(${mainBg})` }}
       >
-        {/* Character Sprite with Dynamic Positioning */}
+        {/* character sprite with dynamic positioning */}
         {playerClass && (
           <div className={`absolute transition-all duration-1000 ease-in-out pointer-events-none z-20 ${getSpritePositionStyles(spriteLocation)}`}>
             <img
@@ -191,7 +187,7 @@ const App = () => {
           </div>
         ))}
 
-        {/* Main Dashboard (Bottom Left) */}
+        {/* skills dashboard (bottom left)*/}
         <div className="absolute bottom-8 left-8 w-full max-w-[350px] z-10">
           <div className="pixel-scroll p-5 flex flex-col w-full border-t-[4px]">
             <div className="flex items-center gap-4 border-b-2 border-[#5d4037]/40 pb-4 mb-4">
@@ -234,30 +230,30 @@ const App = () => {
           </div>
         </div>
 
-        {/* Right Navigation */}
+        {/* right navigation */}
         <nav className="absolute right-0 top-0 h-full w-[70px] bg-[#3e2723] pixel-nav-right flex flex-col justify-between items-center z-50 py-10">
-          
-          {/* Main Navigation Icons */}
+
+          {/* main navigation icons */}
           <div className="flex flex-col gap-10 items-center w-full">
             <button onClick={() => setIsModalOpen(false)} className={`flex flex-col items-center justify-center w-full transition-colors ${!isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
               <Home size={24} />
               <span className="pixel-font text-[6px] mt-2 tracking-wider">MAP</span>
             </button>
-            
+
             <button onClick={() => handleNavClick('stats')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'stats' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
               <BarChart2 size={24} />
               <span className="pixel-font text-[6px] mt-2 tracking-wider">STATS</span>
             </button>
-            
+
             <button onClick={() => handleNavClick('leaderboard')} className={`flex flex-col items-center justify-center w-full transition-colors ${currentPage === 'leaderboard' && isModalOpen ? 'text-[#f4d3a2]' : 'text-[#a67c52] hover:text-[#e2c792]'}`}>
               <Trophy size={24} />
               <span className="pixel-font text-[6px] mt-2 tracking-wider">RANKS</span>
             </button>
           </div>
 
-          {/* Logout Button (Pinned to Bottom) */}
-          <button 
-            onClick={() => setAuthState('login')} 
+          {/* logout button */}
+          <button
+            onClick={() => setAuthState('login')}
             className="flex flex-col items-center justify-center w-full text-[#a67c52] hover:text-red-400 transition-colors group"
           >
             <LogOut size={24} className="group-hover:translate-x-1 transition-transform" />
@@ -265,7 +261,7 @@ const App = () => {
           </button>
         </nav>
 
-        {/* Centred Modal Pop-up */}
+        {/* centred modal popup */}
         {isModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 modal-overlay">
             <div className="relative w-full max-w-2xl max-h-[80vh] pixel-scroll p-8 overflow-y-auto">

@@ -14,7 +14,7 @@ export const loginUser = async (username, password) => {
     }
 
     const data = await response.json();
-    return data; // This returns the user object (stats, level, etc.)
+    return data;
   } catch (err) {
     return { error: 'Server connection failed' };
   }

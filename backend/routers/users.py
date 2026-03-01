@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
-from ..dependencies import get_db
+
 from ..controllers.user_controller import UserController
+from ..dependencies import get_db
 
 router = APIRouter()
 

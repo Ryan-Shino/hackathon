@@ -1,5 +1,4 @@
-import React from 'react';
-import { Shield, Star, Zap, Brain, Heart, Users, ChevronRight } from 'lucide-react';
+import { Shield, Star, Zap, Brain, Heart, Users } from 'lucide-react';
 
 const StatsPage = () => {
   const playerProfile = {
@@ -17,8 +16,8 @@ const StatsPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#2c1810] p-4 pixel-font select-none">
-      
-      {/* Pixel Header - Matching Leaderboard Style */}
+
+      {/* pixel header - matching leaderboard style */}
       <div className="relative mb-8 mt-2">
         <div className="bg-[#5d4037] border-b-4 border-r-4 border-black p-4 flex flex-col items-center">
           <div className="flex items-center gap-3">
@@ -32,8 +31,8 @@ const StatsPage = () => {
         <div className="absolute -top-1 -right-1 w-2 h-2 bg-white" />
       </div>
 
-      {/* Identity Card - Using the "isMe" highlighted style */}
-      <div 
+      {/* identity card */}
+      <div
         className="relative flex items-center gap-4 p-4 border-4 border-black bg-[#8d6e63] mb-8"
         style={{ boxShadow: '6px 6px 0px rgba(0,0,0,0.4)' }}
       >
@@ -56,20 +55,20 @@ const StatsPage = () => {
         </div>
       </div>
 
-      {/* Stats Breakdown Section */}
+      {/* stats breakdown section */}
       <div className="flex flex-col gap-4">
         <h3 className="text-xs font-black text-[#d4b57e] uppercase tracking-[0.2em] mb-2 px-1 border-l-4 border-[#d4b57e]">
           Attribute Progression
         </h3>
-        
+
         {stats.map((stat, index) => {
           const progressPercentage = Math.min((stat.current / stat.nextLevel) * 100, 100);
           const pointsNeeded = stat.nextLevel - stat.current;
           const isMaxed = pointsNeeded === 0;
 
           return (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="bg-[#3e2723] border-4 border-black p-4 flex flex-col gap-3"
               style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.3)' }}
             >
@@ -89,21 +88,21 @@ const StatsPage = () => {
                   </span>
                 </div>
               </div>
-              
-              {/* Retro Progress Bar */}
+
+              {/* retro progress bar */}
               <div className="w-full bg-black h-4 border-2 border-[#5d4037] p-[2px]">
-                <div 
+                <div
                   className={`h-full transition-all duration-1000 ${isMaxed ? 'bg-[#ffd700]' : 'bg-[#d4b57e]'}`}
-                  style={{ 
+                  style={{
                     width: `${progressPercentage}%`,
-                    boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.3)' 
+                    boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.3)'
                   }}
                 ></div>
               </div>
-              
+
               <div className="flex justify-between items-center">
                 <span className="text-[8px] font-bold text-white/20 uppercase tracking-widest">
-                  System.Attr_{stat.name.substring(0,3)}
+                  System.Attr_{stat.name.substring(0, 3)}
                 </span>
                 {isMaxed ? (
                   <span className="text-[9px] bg-white text-black px-2 font-black uppercase italic animate-pulse">
@@ -120,7 +119,7 @@ const StatsPage = () => {
         })}
       </div>
 
-      {/* Retro Footer Decoration */}
+      {/* retro footer decoration */}
       <div className="mt-auto pt-8 flex justify-center opacity-20">
         <div className="flex gap-2">
           {[...Array(5)].map((_, i) => (

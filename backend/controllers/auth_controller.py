@@ -7,7 +7,6 @@ ph = PasswordHasher()
 class AuthController:
     def __init__(self, conn):
         self.conn = conn
-        # This line is CRITICAL so you can use user["password_hash"]
         self.conn.row_factory = lambda cursor, row: dict(
             zip([col[0] for col in cursor.description], row)
         )
@@ -15,12 +14,12 @@ class AuthController:
     def register_user(self, username: str, password: str):
         cursor = self.conn.cursor()
 
-        # 1. Check exists
+        # check exists
         cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
         if cursor.fetchone():
             return False
 
-        # 2. Hash using Argon2 (No 72-character limit!)
+        # hash using argon2
         hashed = ph.hash(password)
 
         cursor.execute(
@@ -42,10 +41,10 @@ class AuthController:
             return None
 
         try:
-            # Verify the hash
+            # verify the hash
             ph.verify(user["password_hash"], password)
         except:
-            # This triggers if the password is wrong
+            # triggers if the password is wrong
             return None
 
         user_data = dict(user)
