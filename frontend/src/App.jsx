@@ -93,11 +93,11 @@ const App = () => {
   // maps the backend location to tailwind positioning classes
   const getSpritePositionStyles = (location) => {
     switch (location) {
-      case 'exercise': return 'top-30/100 left-1/2';
-      case 'learning': return 'top-52/100 left-39/100';
-      case 'nature': return 'top-30 left-10/100 -translate-x-1/2';
-      case 'social': return 'top-1/2 left-3/4 -translate-x-1/2';
-      default: return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'; // Centre
+      case 'exercise': return 'top-20/100 left-1/2';
+      case 'learning': return 'top-76/100 left-37/100';
+      case 'nature': return 'top-40/100 left-13/100 -translate-x-1/2';
+      case 'social': return 'top-42/100 left-78/100 -translate-x-1/2';
+      default: return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'; // centre
     }
   };
 

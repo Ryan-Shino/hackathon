@@ -1,96 +1,39 @@
-# Setup
+# Wander Quest
+This was our winning submission to the Soton Datascience and WECS hackathon.
+It's a gamified way of getting outside and being social, with pixel art inspired by stardew valley.
 
-1. Create folder and subfolders frontend and backend
+We used react and tailwind css for the frontend, with a backend in python using FastAPI.
 
-### Front end
+## Setup and Running It Yourself
 
-1. In front end (cd frontend) run (npm create vite@latest . -- -- template react)
-2. Install tailwind (npm install tailwindcss @tailwindcss/vite) 
-3. npm install
+### Project Setup
 
-1. In vite config file add tailwind plugin 
+For the location categorisation, you must obtain an api key from [https://www.mapbox.com/](mapbox).
 
-```java
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+Then create a python file in `backend/controllers` called `mapbox_token.py` with your token:
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-})
+``` backend/controllers/mapbox_token.py
+TOKEN = "{Paste your token here}"
 ```
 
-1. In index.css, delete everything and import tailwind(@import “tailwindcsss”;)
 
-### Backend
+To set up the backend:
+1. `cd backend`
+2. `uv sync`
 
-1. cd backend
-2. Create venv (python -m venv venv)
-3. Activate (source venv/bin/activate)
-4. Install fastapi and uvicorn (pip install fastapi uvicorn)
+To set up the frontend:
+1. `cd frontend`
+2. `npm install`
 
-### Combining
+### Running
+You need 2 terminals, one for the fastapi server and one for the frontend.
 
-We need to allow them to talk to each other:
+Backend terminal (from project root directory):
 
-In main.py
+```uv run --project backend uvicorn backend.main:app --reload```
 
-```java
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+Frontend terminal (from `frontend` directory):
 
-app = FastAPI()
+```npm run dev```
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/hello")
-def read_root():
-    return {"message": "Hello from the Python backend!"}
-```
-
-In App.jsx
-
-```java
-import { useEffect, useState } from 'react'
-
-function App() {
-  const [msg, setMsg] = useState("Loading...")
-
-  useEffect(() => {
-    fetch("http://localhost:8000/hello")
-      .then(res => res.json())
-      .then(data => setMsg(data.message))
-  }, [])
-
-  return (
-    <div className="h-screen flex items-center justify-center bg-blue-500">
-      <h1 className="text-4xl font-bold text-white">{msg}</h1>
-    </div>
-  )
-}
-
-export default App
-```
-
-### Running it
-
-Backend terminal: uvicorn main:app -- reload
-
-Frontend terminal: npm run dev
-
-### Gitignore
-```java
-# Ignore React dependencies
-frontend/node_modules/
-frontend/dist/
-
-# Ignore Python dependencies
-backend/venv/
-backend/__pycache__/
-.env
-```
+Go to [localhost port 5173](http://localhost:5173/) on a browser
