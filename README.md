@@ -23,7 +23,7 @@ Users can compete with their friends in different categories, or overall:
 
 ![Leaderboard](images/leaderboard.png)
 
-And users can log in or register, and choose their path. Their path allows them to gain more points for certain activities, e.g. the knight earns more points from exercising.
+Users can log in or register, and choose their path. Their path allows them to gain more points for certain activities, e.g. the knight earns more points from exercising.
 
 ![Path Selector](images/path_selector.png)
 
